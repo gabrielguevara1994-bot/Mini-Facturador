@@ -117,7 +117,7 @@ function agregarProducto() {
 }
 
 
-// Agrega los eventos necesarios a cada producto
+// Agrega a cada producto
 function agregarEventosFila(fila) {
 
     const cantidad =
@@ -145,5 +145,86 @@ function agregarEventosFila(fila) {
         calcularTotales
     );
 }
+// Calcula subtotal, IVA y total de la factura
+function calcularTotales() {
+
+    const filas =
+        document.querySelectorAll(
+            "#listaProductos tr"
+        );
+
+    let subtotal = 0;
+    let ivaTotal = 0;
+
+
+    filas.forEach(fila => {
+
+        const cantidad =
+            Number(
+                fila.querySelector(
+                    ".cantidad"
+                ).value
+            );
+
+        const precio =
+            Number(
+                fila.querySelector(
+                    ".precio"
+                ).value
+            );
+
+        const porcentajeIva =
+            Number(
+                fila.querySelector(
+                    ".iva"
+                ).value
+            );
+
+
+        const subtotalProducto =
+            cantidad * precio;
+
+        const ivaProducto =
+            subtotalProducto *
+            porcentajeIva / 100;
+
+        const totalProducto =
+            subtotalProducto +
+            ivaProducto;
+
+
+        fila.querySelector(
+            ".totalProducto"
+        ).textContent =
+            totalProducto.toFixed(2);
+
+
+        subtotal += subtotalProducto;
+
+        ivaTotal += ivaProducto;
+
+    });
+
+
+    const total =
+        subtotal + ivaTotal;
+
+
+    document.getElementById(
+        "subtotal"
+    ).textContent =
+        subtotal.toFixed(2);
+
+    document.getElementById(
+        "ivaTotal"
+    ).textContent =
+        ivaTotal.toFixed(2);
+
+    document.getElementById(
+        "totalFactura"
+    ).textContent =
+        total.toFixed(2);
+}
+
 
 
