@@ -648,13 +648,9 @@ function guardarProducto() {
     const nuevoProducto = {
 
         id: Date.now(),
-
         codigo: codigo,
-
         nombre: nombre,
-
         precio: precio,
-
         iva: iva
 
     };
@@ -663,13 +659,11 @@ function guardarProducto() {
     // Agregamos el producto al catálogo
     productos.push(nuevoProducto);
 
-
     // Guardamos el catálogo en el navegador
     localStorage.setItem(
         "productos",
         JSON.stringify(productos)
     );
-
 
     // Limpiamos los campos
     document.getElementById(
@@ -684,16 +678,78 @@ function guardarProducto() {
         "precioProducto"
     ).value = "";
 
-
     // Actualizamos la pantalla
     mostrarProductos();
-
 
     alert(
         "Producto guardado correctamente."
     );
 }
 
+// Muestra todos los productos registrados
+function mostrarProductos() {
+
+    const lista =
+        document.getElementById(
+            "listaCatalogo"
+        );
+
+    // Si no existen productos mostramos un mensaje
+    if (productos.length === 0) {
+
+        lista.innerHTML = `
+            <p>
+                No existen productos registrados.
+            </p>
+        `;
+        return;
+    }
+
+    // Limpiamos la lista antes de volver a construirla
+    lista.innerHTML = "";
+
+    // Recorremos todos los productos
+    productos.forEach(producto => {
+
+        const elemento =
+            document.createElement("div");
+
+        elemento.className =
+            "producto-item";
+
+        elemento.innerHTML = `
+
+            <span class="producto-codigo">
+                ${producto.codigo}
+            </span>
+
+            <span class="producto-nombre">
+                ${producto.nombre}
+            </span>
+
+            <span class="producto-precio">
+                $${producto.precio.toFixed(2)}
+            </span>
+
+            <span>
+                IVA ${producto.iva}%
+            </span>
+
+            <button
+                type="button"
+                class="producto-eliminar"
+                onclick="eliminarProducto(${producto.id})"
+            >
+                Eliminar
+            </button>
+
+        `;
+
+
+        lista.appendChild(elemento);
+
+    });
+}
 
 // Inicializamos el programa colocando la fecha actual
 colocarFechaActual();
