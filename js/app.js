@@ -750,6 +750,35 @@ function mostrarProductos() {
 
     });
 }
+// Elimina un producto del catálogo
+function eliminarProducto(id) {
+
+    const confirmar =
+        confirm(
+            "¿Desea eliminar este producto?"
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    productos =
+        productos.filter(
+            producto =>
+                producto.id !== id
+        );
+
+
+    localStorage.setItem(
+        "productos",
+        JSON.stringify(productos)
+    );
+
+
+    mostrarProductos();
+}
 
 // Inicializamos el programa colocando la fecha actual
 colocarFechaActual();
