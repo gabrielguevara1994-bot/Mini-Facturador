@@ -583,6 +583,117 @@ function limpiarFormulario() {
     colocarFechaActual();
 }
 
+// Guarda un nuevo producto en el catálogo
+function guardarProducto() {
+
+    const codigo =
+        document.getElementById(
+            "codigoProducto"
+        ).value.trim();
+
+    const nombre =
+        document.getElementById(
+            "nombreProducto"
+        ).value.trim();
+
+    const precio =
+        Number(
+            document.getElementById(
+                "precioProducto"
+            ).value
+        );
+
+    const iva =
+        Number(
+            document.getElementById(
+                "ivaProducto"
+            ).value
+        );
+
+
+    // Validamos los datos obligatorios
+    if (
+        codigo === "" ||
+        nombre === "" ||
+        precio <= 0
+    ) {
+
+        alert(
+            "Complete correctamente los datos del producto."
+        );
+
+        return;
+    }
+
+
+    // Verificamos que el código no esté repetido
+    const productoExiste =
+        productos.some(
+            producto =>
+                producto.codigo === codigo
+        );
+
+
+    if (productoExiste) {
+
+        alert(
+            "Ya existe un producto con ese código."
+        );
+
+        return;
+    }
+
+
+    // Creamos el nuevo producto
+    const nuevoProducto = {
+
+        id: Date.now(),
+
+        codigo: codigo,
+
+        nombre: nombre,
+
+        precio: precio,
+
+        iva: iva
+
+    };
+
+
+    // Agregamos el producto al catálogo
+    productos.push(nuevoProducto);
+
+
+    // Guardamos el catálogo en el navegador
+    localStorage.setItem(
+        "productos",
+        JSON.stringify(productos)
+    );
+
+
+    // Limpiamos los campos
+    document.getElementById(
+        "codigoProducto"
+    ).value = "";
+
+    document.getElementById(
+        "nombreProducto"
+    ).value = "";
+
+    document.getElementById(
+        "precioProducto"
+    ).value = "";
+
+
+    // Actualizamos la pantalla
+    mostrarProductos();
+
+
+    alert(
+        "Producto guardado correctamente."
+    );
+}
+
 
 // Inicializamos el programa colocando la fecha actual
 colocarFechaActual();
