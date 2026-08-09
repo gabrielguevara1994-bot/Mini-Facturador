@@ -226,5 +226,22 @@ function calcularTotales() {
         total.toFixed(2);
 }
 
+// Elimina un producto de la factura
+function eliminarProducto(id) {
+
+    const fila =
+        document.getElementById(
+            "producto-" + id
+        );
+
+
+    if (fila) {
+        fila.remove();
+    }
+
+
+    calcularTotales();
+}
+
 
 
