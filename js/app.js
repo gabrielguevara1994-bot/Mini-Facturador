@@ -202,6 +202,52 @@ function agregarEventosFila(fila) {
     );
 
 }
+
+// Carga precio e IVA desde el catálogo
+function cargarDatosProducto(fila) {
+
+    const selector =
+        fila.querySelector(
+            ".productoSeleccionado"
+        );
+
+
+    const id =
+        Number(
+            selector.value
+        );
+
+
+    const producto =
+        productos.find(
+            producto =>
+                producto.id === id
+        );
+
+
+    if (!producto) {
+
+        fila.querySelector(
+            ".precio"
+        ).value = 0;
+
+        return;
+    }
+
+
+    // Colocamos automáticamente el precio
+    fila.querySelector(
+        ".precio"
+    ).value =
+        producto.precio;
+
+
+    // Colocamos automáticamente el IVA
+    fila.querySelector(
+        ".iva"
+    ).value =
+        producto.iva;
+}
 // Calcula subtotal, IVA y total de la factura
 function calcularTotales() {
 
