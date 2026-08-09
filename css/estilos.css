@@ -1,0 +1,605 @@
+/* =========================================================
+   MINI FACTURADOR
+   Diseño inspirado en la interfaz institucional del SRI
+   ========================================================= */
+
+
+/* -------------------------
+   CONFIGURACIÓN GENERAL
+   ------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: #f4f6f8;
+
+    color: #333;
+}
+
+
+/* -------------------------
+   ENCABEZADO
+   ------------------------- */
+
+h1 {
+    margin: 0;
+
+    padding: 22px 30px;
+
+    background-color: #0056a6;
+
+    color: white;
+
+    font-size: 25px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    border-bottom: 4px solid #f2c300;
+}
+
+
+/* -------------------------
+   CONTENEDORES
+   ------------------------- */
+
+.contenedor {
+    width: 95%;
+
+    max-width: 1100px;
+
+    margin: 20px auto;
+
+    padding: 0;
+
+    background-color: white;
+
+    border: 1px solid #d9dee3;
+
+    border-radius: 4px;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Títulos de las secciones */
+
+.contenedor h2 {
+    margin: 0;
+
+    padding: 14px 18px;
+
+    background-color: #eaf2f8;
+
+    color: #0056a6;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    border-bottom: 1px solid #d5dde5;
+}
+
+
+/* Contenido interno de las secciones */
+
+.contenedor > div:not(.datos-emisor) {
+    padding: 20px;
+}
+
+
+/* -------------------------
+   DATOS DEL EMISOR
+   ------------------------- */
+
+.datos-emisor {
+    margin: 20px;
+
+    padding: 15px 20px;
+
+    background-color: #f8fafc;
+
+    border: 1px solid #d9dee3;
+
+    border-left: 4px solid #0056a6;
+
+    border-radius: 3px;
+}
+
+
+.datos-emisor p {
+    margin: 8px 0;
+
+    font-size: 14px;
+
+    color: #444;
+}
+
+
+.datos-emisor strong {
+    color: #0056a6;
+}
+
+
+/* -------------------------
+   DISTRIBUCIÓN DE CAMPOS
+   ------------------------- */
+
+.fila {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+
+/* -------------------------
+   CAMPOS DEL FORMULARIO
+   ------------------------- */
+
+.campo {
+    margin-bottom: 15px;
+}
+
+
+.campo label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #444;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.campo input,
+.campo select {
+    width: 100%;
+
+    height: 38px;
+
+    padding: 8px 10px;
+
+    background-color: white;
+
+    border: 1px solid #bfc7cf;
+
+    border-radius: 3px;
+
+    color: #333;
+
+    font-size: 14px;
+}
+
+
+/* Cuando el usuario selecciona un campo */
+
+.campo input:focus,
+.campo select:focus {
+    outline: none;
+
+    border-color: #0056a6;
+
+    box-shadow: 0 0 0 2px rgba(0, 86, 166, 0.12);
+}
+
+
+/* -------------------------
+   TABLA DE PRODUCTOS
+   ------------------------- */
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-bottom: 15px;
+}
+
+
+/* Encabezados */
+
+th {
+    padding: 11px 8px;
+
+    background-color: #0056a6;
+
+    color: white;
+
+    border: 1px solid #004985;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-align: center;
+}
+
+
+/* Celdas */
+
+td {
+    padding: 8px;
+
+    background-color: white;
+
+    border: 1px solid #d8dde2;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* Filas alternadas */
+
+tbody tr:nth-child(even) td {
+    background-color: #f7f9fb;
+}
+
+
+/* Efecto al pasar el mouse */
+
+tbody tr:hover td {
+    background-color: #eef5fb;
+}
+
+
+/* Inputs dentro de la tabla */
+
+td input,
+td select {
+    width: 100%;
+
+    height: 34px;
+
+    padding: 6px 8px;
+
+    border: 1px solid #c5ccd3;
+
+    border-radius: 3px;
+
+    font-size: 13px;
+}
+
+
+/* -------------------------
+   BOTONES
+   ------------------------- */
+
+button {
+    padding: 9px 16px;
+
+    margin: 5px;
+
+    background-color: #0056a6;
+
+    color: white;
+
+    border: 1px solid #004985;
+
+    border-radius: 3px;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+
+button:hover {
+    background-color: #003f7d;
+}
+
+
+button:active {
+    transform: translateY(1px);
+}
+
+
+/* -------------------------
+   BOTÓN AGREGAR PRODUCTO
+   ------------------------- */
+
+#listaProductos {
+    background-color: white;
+}
+
+
+/* -------------------------
+   TOTALES
+   ------------------------- */
+
+.totales {
+    width: 95%;
+
+    max-width: 1100px;
+
+    margin: 20px auto;
+
+    padding: 20px;
+
+    background-color: white;
+
+    border: 1px solid #d9dee3;
+
+    border-radius: 4px;
+
+    text-align: right;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+}
+
+
+.totales p {
+    margin: 8px 0;
+
+    color: #555;
+
+    font-size: 15px;
+}
+
+
+.totales h2 {
+    margin: 15px 0 0;
+
+    padding-top: 12px;
+
+    border-top: 1px solid #d9dee3;
+
+    color: #0056a6;
+
+    font-size: 22px;
+}
+
+
+/* -------------------------
+   BOTONES PRINCIPALES
+   ------------------------- */
+
+.acciones {
+    width: 95%;
+
+    max-width: 1100px;
+
+    margin: 20px auto;
+
+    padding: 15px;
+
+    background-color: white;
+
+    border: 1px solid #d9dee3;
+
+    border-radius: 4px;
+
+    text-align: right;
+}
+
+
+.acciones button {
+    min-width: 160px;
+
+    padding: 11px 20px;
+
+    font-weight: 600;
+}
+
+
+/* Botón generar factura */
+
+.acciones button:first-child {
+    background-color: #0056a6;
+}
+
+
+/* Botón limpiar */
+
+.acciones button:last-child {
+    background-color: #6c757d;
+
+    border-color: #5c636a;
+}
+
+
+.acciones button:last-child:hover {
+    background-color: #545b62;
+}
+
+
+/* -------------------------
+   FACTURAS GENERADAS
+   ------------------------- */
+
+.factura-generada {
+    margin: 20px;
+
+    padding: 20px;
+
+    background-color: white;
+
+    border: 1px solid #cfd6dc;
+
+    border-radius: 3px;
+}
+
+
+/* Título de la factura */
+
+.factura-generada h3 {
+    margin-top: 0;
+
+    padding: 12px;
+
+    background-color: #0056a6;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: 600;
+}
+
+
+/* Subtítulos */
+
+.factura-generada h4 {
+    margin-top: 20px;
+
+    padding-bottom: 8px;
+
+    color: #0056a6;
+
+    border-bottom: 2px solid #e5e9ed;
+
+    font-size: 15px;
+}
+
+
+/* Datos de la factura */
+
+.factura-generada p {
+    margin: 7px 0;
+
+    font-size: 13px;
+
+    color: #444;
+}
+
+
+/* Tabla de la factura generada */
+
+.factura-generada table {
+    margin-top: 15px;
+}
+
+
+.factura-generada th {
+    background-color: #0056a6;
+}
+
+
+.factura-generada td {
+    font-size: 13px;
+}
+
+
+/* -------------------------
+   TOTALES DE LA FACTURA
+   ------------------------- */
+
+.total-final {
+    margin-top: 20px;
+
+    padding: 15px;
+
+    background-color: #f5f7f9;
+
+    border: 1px solid #d9dee3;
+
+    text-align: right;
+}
+
+
+.total-final p {
+    margin: 6px 0;
+
+    font-size: 14px;
+}
+
+
+.total-final h2 {
+    margin: 10px 0 0;
+
+    color: #0056a6;
+
+    font-size: 20px;
+}
+
+
+/* -------------------------
+   RESPONSIVE
+   ------------------------- */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 0;
+    }
+
+
+    h1 {
+        padding: 18px;
+
+        font-size: 20px;
+    }
+
+
+    .contenedor,
+    .totales,
+    .acciones {
+        width: 100%;
+
+        margin: 10px 0;
+
+        border-left: none;
+
+        border-right: none;
+
+        border-radius: 0;
+    }
+
+
+    .fila {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+
+    table {
+        display: block;
+
+        overflow-x: auto;
+
+        white-space: nowrap;
+    }
+
+
+    th,
+    td {
+        padding: 7px;
+    }
+
+
+    .acciones {
+        text-align: center;
+    }
+
+
+    .acciones button {
+        width: 90%;
+
+        margin: 5px auto;
+    }
+
+
+    .factura-generada {
+        margin: 10px;
+
+        padding: 12px;
+    }
+
+}
