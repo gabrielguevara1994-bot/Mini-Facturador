@@ -329,23 +329,6 @@ function calcularTotales() {
         total.toFixed(2);
 }
 
-// Elimina un producto de la factura
-function eliminarProducto(id) {
-
-    const fila =
-        document.getElementById(
-            "producto-" + id
-        );
-
-
-    if (fila) {
-        fila.remove();
-    }
-
-
-    calcularTotales();
-}
-
 // Genera una factura y la muestra en pantalla
 function generarFactura() {
 
@@ -938,6 +921,7 @@ function mostrarSeccion(seccion) {
 // Inicializamos el programa colocando la fecha actual
 colocarFechaActual();
 mostrarProductos();
+mostrarSeccion("facturacion");
 
 
 

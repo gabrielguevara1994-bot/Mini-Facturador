@@ -697,3 +697,12 @@ button:active {
 .producto-eliminar:hover {
     background-color: #c82333;
 }
+
+/* Control de las secciones */
+.vista {
+    display: none;
+}
+
+.vista.activa {
+    display: block;
+}
