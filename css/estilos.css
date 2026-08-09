@@ -603,3 +603,97 @@ button:active {
     }
 
 }
+
+/* Formulario del catálogo de productos */
+
+.producto-formulario {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        2fr
+        1fr
+        1fr;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+}
+
+
+/* Título del catálogo */
+
+.contenedor h3 {
+    margin-top: 25px;
+
+    color: #0056a6;
+
+    font-size: 16px;
+}
+
+
+/* Tarjeta de cada producto */
+
+.producto-item {
+    display: grid;
+
+    grid-template-columns:
+        100px
+        1fr
+        120px
+        80px
+        100px;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px;
+
+    margin-bottom: 8px;
+
+    background-color: #f7f9fb;
+
+    border: 1px solid #d9dee3;
+
+    border-radius: 3px;
+}
+
+
+/* Código del producto */
+
+.producto-codigo {
+    font-weight: bold;
+
+    color: #0056a6;
+}
+
+
+/* Nombre del producto */
+
+.producto-nombre {
+    color: #333;
+}
+
+
+/* Precio del producto */
+
+.producto-precio {
+    text-align: right;
+
+    font-weight: bold;
+}
+
+
+/* Botón eliminar producto */
+
+.producto-eliminar {
+    background-color: #dc3545;
+
+    border-color: #c82333;
+}
+
+
+.producto-eliminar:hover {
+    background-color: #c82333;
+}
