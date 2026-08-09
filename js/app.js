@@ -2,6 +2,11 @@
 let contadorProductos = 0;
 let contadorFacturas = 1;
 
+// Catálogo de productos almacenado en el navegador
+let productos = JSON.parse(
+    localStorage.getItem("productos")
+) || [];
+
 const RUC_EMISOR = "1723441703";
 
 const NOMBRE_EMISOR =
