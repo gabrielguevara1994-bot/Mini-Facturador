@@ -31,3 +31,119 @@ function colocarFechaActual() {
     document.getElementById("fecha").value =
         `${anio}-${mes}-${dia}`;
 }
+// Agrega una nueva fila de producto
+function agregarProducto() {
+
+    contadorProductos++;
+
+    const lista =
+        document.getElementById(
+            "listaProductos"
+        );
+
+    const fila =
+        document.createElement("tr");
+
+    fila.id =
+        "producto-" + contadorProductos;
+
+
+    // Creamos dinámicamente las celdas del producto
+    fila.innerHTML = `
+
+        <td>
+            <input
+                type="number"
+                class="cantidad"
+                value="1"
+                min="1"
+            >
+        </td>
+
+        <td>
+            <input
+                type="text"
+                class="descripcion"
+                placeholder="Producto"
+            >
+        </td>
+
+        <td>
+            <input
+                type="number"
+                class="precio"
+                value="0"
+                min="0"
+                step="0.01"
+            >
+        </td>
+
+        <td>
+            <select class="iva">
+
+                <option value="15">
+                    15%
+                </option>
+
+                <option value="0">
+                    0%
+                </option>
+
+            </select>
+        </td>
+
+        <td>
+            <span class="totalProducto">
+                0.00
+            </span>
+        </td>
+
+        <td>
+
+            <button
+                type="button"
+                onclick="eliminarProducto(${contadorProductos})"
+            >
+                Eliminar
+            </button>
+
+        </td>
+    `;
+
+
+    lista.appendChild(fila);
+
+    agregarEventosFila(fila);
+}
+
+
+// Agrega los eventos necesarios a cada producto
+function agregarEventosFila(fila) {
+
+    const cantidad =
+        fila.querySelector(".cantidad");
+
+    const precio =
+        fila.querySelector(".precio");
+
+    const iva =
+        fila.querySelector(".iva");
+
+
+    cantidad.addEventListener(
+        "input",
+        calcularTotales
+    );
+
+    precio.addEventListener(
+        "input",
+        calcularTotales
+    );
+
+    iva.addEventListener(
+        "change",
+        calcularTotales
+    );
+}
+
+
