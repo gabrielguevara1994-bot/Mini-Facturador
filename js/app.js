@@ -54,66 +54,101 @@ function agregarProducto() {
 
 
     // Creamos dinámicamente las celdas del producto
-    fila.innerHTML = `
+ fila.innerHTML = `
 
-        <td>
-            <input
-                type="number"
-                class="cantidad"
-                value="1"
-                min="1"
-            >
-        </td>
+    <td>
 
-        <td>
-            <input
-                type="text"
-                class="descripcion"
-                placeholder="Producto"
-            >
-        </td>
+        <input
+            type="number"
+            class="cantidad"
+            value="1"
+            min="1"
+        >
 
-        <td>
-            <input
-                type="number"
-                class="precio"
-                value="0"
-                min="0"
-                step="0.01"
-            >
-        </td>
+    </td>
 
-        <td>
-            <select class="iva">
 
-                <option value="15">
-                    15%
+    <td>
+
+        <select
+            class="productoSeleccionado"
+        >
+
+            <option value="">
+                Seleccione un producto
+            </option>
+
+            ${productos.map(producto => `
+
+                <option value="${producto.id}">
+
+                    ${producto.codigo} -
+                    ${producto.nombre}
+
                 </option>
 
-                <option value="0">
-                    0%
-                </option>
+            `).join("")}
 
-            </select>
-        </td>
+        </select>
 
-        <td>
-            <span class="totalProducto">
-                0.00
-            </span>
-        </td>
+    </td>
 
-        <td>
 
-            <button
-                type="button"
-                onclick="eliminarProducto(${contadorProductos})"
-            >
-                Eliminar
-            </button>
+    <td>
 
-        </td>
-    `;
+        <input
+            type="number"
+            class="precio"
+            value="0"
+            min="0"
+            step="0.01"
+            readonly
+        >
+
+    </td>
+
+
+    <td>
+
+        <select
+            class="iva"
+            disabled
+        >
+
+            <option value="15">
+                15%
+            </option>
+
+            <option value="0">
+                0%
+            </option>
+
+        </select>
+
+    </td>
+
+
+    <td>
+
+        <span class="totalProducto">
+            0.00
+        </span>
+
+    </td>
+
+
+    <td>
+
+        <button
+            type="button"
+            onclick="eliminarProducto(${contadorProductos})"
+        >
+            Eliminar
+        </button>
+
+    </td>
+
+`;
 
 
     lista.appendChild(fila);
@@ -123,6 +158,7 @@ function agregarProducto() {
 
 
 // Agrega a cada producto
+// Configura los eventos de una fila de producto
 function agregarEventosFila(fila) {
 
     const cantidad =
@@ -133,6 +169,26 @@ function agregarEventosFila(fila) {
 
     const iva =
         fila.querySelector(".iva");
+
+    const productoSeleccionado =
+        fila.querySelector(
+            ".productoSeleccionado"
+        );
+
+
+    // Cuando cambia el producto,
+    // cargamos automáticamente sus datos
+    productoSeleccionado.addEventListener(
+        "change",
+        function () {
+
+            cargarDatosProducto(
+                fila
+            );
+
+            calcularTotales();
+        }
+    );
 
 
     cantidad.addEventListener(
@@ -145,10 +201,6 @@ function agregarEventosFila(fila) {
         calcularTotales
     );
 
-    iva.addEventListener(
-        "change",
-        calcularTotales
-    );
 }
 // Calcula subtotal, IVA y total de la factura
 function calcularTotales() {
@@ -782,6 +834,7 @@ function eliminarProducto(id) {
 
 // Inicializamos el programa colocando la fecha actual
 colocarFechaActual();
+mostrarProductos();
 
 
 
