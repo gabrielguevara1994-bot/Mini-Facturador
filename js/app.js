@@ -447,10 +447,30 @@ function generarFactura() {
                 ".cantidad"
             ).value;
 
-        const descripcion =
-            fila.querySelector(
-                ".descripcion"
-            ).value.trim();
+        const selectorProducto =
+    fila.querySelector(
+        ".productoSeleccionado"
+    );
+
+const idProducto =
+    Number(
+        selectorProducto.value
+    );
+
+const producto =
+    productos.find(
+        producto =>
+            producto.id === idProducto
+    );
+
+
+if (!producto) {
+    return;
+}
+
+
+const descripcion =
+    producto.nombre;
 
         const precio =
             fila.querySelector(
