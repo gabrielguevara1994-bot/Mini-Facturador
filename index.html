@@ -14,8 +14,34 @@
 
 <body>
    
+  <header class="encabezado">
+
     <h1>Mini Facturador Ecuador</h1>
 
+    <nav class="menu">
+
+        <button
+            type="button"
+            onclick="mostrarSeccion('facturacion')"
+        >
+            Facturación
+        </button>
+
+        <button
+            type="button"
+            onclick="mostrarSeccion('productos')"
+        >
+            Productos
+        </button>
+
+    </nav>
+
+</header>
+
+    <section
+    id="seccionFacturacion"
+    class="vista"
+>
     <section class="contenedor">
 
         <h2>Datos del Emisor</h2>
@@ -193,95 +219,102 @@
     </section>
 
     <!-- Catálogo de productos -->
-<section class="contenedor">
+<!-- Sección exclusiva para administrar productos -->
+<section
+    id="seccionProductos"
+    class="vista"
+>
 
-    <h2>Productos</h2>
+    <div class="contenedor">
 
-    <div class="producto-formulario">
+        <h2>Catálogo de Productos</h2>
 
-        <div class="campo">
+        <div class="producto-formulario">
 
-            <label for="codigoProducto">
-                Código
-            </label>
+            <div class="campo">
 
-            <input
-                type="text"
-                id="codigoProducto"
-                placeholder="Ej: PROD001"
-            >
+                <label for="codigoProducto">
+                    Código
+                </label>
+
+                <input
+                    type="text"
+                    id="codigoProducto"
+                    placeholder="Ej: PROD001"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="nombreProducto">
+                    Nombre del producto
+                </label>
+
+                <input
+                    type="text"
+                    id="nombreProducto"
+                    placeholder="Ej: Laptop Lenovo"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="precioProducto">
+                    Precio
+                </label>
+
+                <input
+                    type="number"
+                    id="precioProducto"
+                    placeholder="0.00"
+                    min="0"
+                    step="0.01"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="ivaProducto">
+                    IVA
+                </label>
+
+                <select id="ivaProducto">
+
+                    <option value="15">
+                        15%
+                    </option>
+
+                    <option value="0">
+                        0%
+                    </option>
+
+                </select>
+
+            </div>
 
         </div>
 
 
-        <div class="campo">
-
-            <label for="nombreProducto">
-                Nombre del producto
-            </label>
-
-            <input
-                type="text"
-                id="nombreProducto"
-                placeholder="Ej: Laptop"
-            >
-
-        </div>
+        <button
+            type="button"
+            onclick="guardarProducto()"
+        >
+            Guardar Producto
+        </button>
 
 
-        <div class="campo">
-
-            <label for="precioProducto">
-                Precio
-            </label>
-
-            <input
-                type="number"
-                id="precioProducto"
-                placeholder="0.00"
-                min="0"
-                step="0.01"
-            >
-
-        </div>
+        <h3>
+            Productos registrados
+        </h3>
 
 
-        <div class="campo">
-
-            <label for="ivaProducto">
-                IVA
-            </label>
-
-            <select id="ivaProducto">
-
-                <option value="15">
-                    15%
-                </option>
-
-                <option value="0">
-                    0%
-                </option>
-
-            </select>
-
-        </div>
-
-    </div>
-
-
-    <button
-        type="button"
-        onclick="guardarProducto()"
-    >
-        Guardar Producto
-    </button>
-
-
-    <h3>Productos registrados</h3>
-
-
-    <!-- Aquí aparecerán los productos guardados -->
-    <div id="listaCatalogo">
+        <div id="listaCatalogo"></div>
 
     </div>
 
@@ -419,6 +452,8 @@
         <div id="facturasGeneradas">
 
         </div>
+
+    </section>
 
     </section>
 

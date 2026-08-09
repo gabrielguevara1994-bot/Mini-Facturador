@@ -898,6 +898,43 @@ function eliminarProducto(id) {
     mostrarProductos();
 }
 
+// Cambia entre la vista de facturación y productos
+function mostrarSeccion(seccion) {
+
+    const facturacion =
+        document.getElementById(
+            "seccionFacturacion"
+        );
+
+    const productos =
+        document.getElementById(
+            "seccionProductos"
+        );
+
+
+    // Ocultamos las dos secciones
+    facturacion.classList.remove("activa");
+
+    productos.classList.remove("activa");
+
+
+    // Mostramos solamente la sección seleccionada
+    if (seccion === "facturacion") {
+
+        facturacion.classList.add("activa");
+
+    }
+
+
+    if (seccion === "productos") {
+
+        productos.classList.add("activa");
+
+        mostrarProductos();
+
+    }
+
+}
 // Inicializamos el programa colocando la fecha actual
 colocarFechaActual();
 mostrarProductos();
