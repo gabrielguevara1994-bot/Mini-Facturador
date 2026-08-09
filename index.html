@@ -192,14 +192,104 @@
 
     </section>
 
+    <!-- Catálogo de productos -->
+<section class="contenedor">
+
+    <h2>Productos</h2>
+
+    <div class="producto-formulario">
+
+        <div class="campo">
+
+            <label for="codigoProducto">
+                Código
+            </label>
+
+            <input
+                type="text"
+                id="codigoProducto"
+                placeholder="Ej: PROD001"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="nombreProducto">
+                Nombre del producto
+            </label>
+
+            <input
+                type="text"
+                id="nombreProducto"
+                placeholder="Ej: Laptop"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="precioProducto">
+                Precio
+            </label>
+
+            <input
+                type="number"
+                id="precioProducto"
+                placeholder="0.00"
+                min="0"
+                step="0.01"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="ivaProducto">
+                IVA
+            </label>
+
+            <select id="ivaProducto">
+
+                <option value="15">
+                    15%
+                </option>
+
+                <option value="0">
+                    0%
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <button
+        type="button"
+        onclick="guardarProducto()"
+    >
+        Guardar Producto
+    </button>
+
+
+    <h3>Productos registrados</h3>
+
+
+    <!-- Aquí aparecerán los productos guardados -->
+    <div id="listaCatalogo">
+
+    </div>
+
+</section>
+
     <section class="contenedor">
 
         <h2>Detalle de la Factura</h2>
-
-        <!--
-            Tabla donde aparecerán los productos
-            agregados por el usuario.
-        -->
         <table>
 
             <!-- ENCABEZADO DE LA TABLA -->
