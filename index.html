@@ -192,4 +192,61 @@
 
     </section>
 
+    <section class="contenedor">
+
+        <h2>Detalle de la Factura</h2>
+
+        <!--
+            Tabla donde aparecerán los productos
+            agregados por el usuario.
+        -->
+        <table>
+
+            <!-- ENCABEZADO DE LA TABLA -->
+
+            <thead>
+
+                <tr>
+
+                    <th>Cantidad</th>
+
+                    <th>Descripción</th>
+
+                    <th>Precio</th>
+
+                    <th>IVA</th>
+
+                    <th>Total</th>
+
+                    <th>Acción</th>
+
+                </tr>
+
+            </thead>
+
+            <!--
+                Aquí JavaScript agregará dinámicamente
+                las filas de productos.
+            -->
+            <tbody id="listaProductos">
+
+            </tbody>
+
+        </table>
+
+        <!--
+            Al hacer clic se ejecutará
+            la función agregarProducto().
+        -->
+        <button
+            type="button"
+            onclick="agregarProducto()"
+        >
+
+            + Agregar Producto
+
+        </button>
+
+    </section>
+
 
