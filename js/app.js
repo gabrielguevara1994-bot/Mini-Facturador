@@ -243,5 +243,347 @@ function eliminarProducto(id) {
     calcularTotales();
 }
 
+// Genera una factura y la muestra en pantalla
+function generarFactura() {
+
+    // Datos del emisor
+    const ruc =
+        RUC_EMISOR;
+
+    const razonSocial =
+        NOMBRE_EMISOR;
+
+    const direccion =
+        DIRECCION_EMISOR;
+
+
+    // Datos generales de la factura
+    const numeroFactura =
+        document.getElementById(
+            "numeroFactura"
+        ).value;
+
+    const fecha =
+        document.getElementById(
+            "fecha"
+        ).value;
+
+
+    // Datos del cliente
+    const identificacionCliente =
+        document.getElementById(
+            "identificacionCliente"
+        ).value.trim();
+
+    const nombreCliente =
+        document.getElementById(
+            "nombreCliente"
+        ).value.trim();
+
+    const direccionCliente =
+        document.getElementById(
+            "direccionCliente"
+        ).value.trim();
+
+    const correoCliente =
+        document.getElementById(
+            "correoCliente"
+        ).value.trim();
+
+
+    // Totales calculados
+    const subtotal =
+        document.getElementById(
+            "subtotal"
+        ).textContent;
+
+    const iva =
+        document.getElementById(
+            "ivaTotal"
+        ).textContent;
+
+    const total =
+        document.getElementById(
+            "totalFactura"
+        ).textContent;
+
+
+    // Validamos que exista un cliente
+    if (nombreCliente === "") {
+
+        alert(
+            "Ingrese el nombre del cliente."
+        );
+
+        return;
+    }
+    // Validamos que exista al menos un producto
+    const filas =
+        document.querySelectorAll(
+            "#listaProductos tr"
+        );
+
+    if (filas.length === 0) {
+
+        alert(
+            "Debe agregar al menos un producto."
+        );
+
+        return;
+    }
+
+
+    // Construimos el detalle de productos
+    let productosHTML = "";
+
+
+    filas.forEach(fila => {
+
+        const cantidad =
+            fila.querySelector(
+                ".cantidad"
+            ).value;
+
+        const descripcion =
+            fila.querySelector(
+                ".descripcion"
+            ).value.trim();
+
+        const precio =
+            fila.querySelector(
+                ".precio"
+            ).value;
+
+        const ivaProducto =
+            fila.querySelector(
+                ".iva"
+            ).value;
+
+        const totalProducto =
+            fila.querySelector(
+                ".totalProducto"
+            ).textContent;
+
+
+        // No agregamos productos sin descripción
+        if (descripcion === "") {
+            return;
+        }
+
+
+        productosHTML += `
+
+            <tr>
+
+                <td>
+                    ${cantidad}
+                </td>
+
+                <td>
+                    ${descripcion}
+                </td>
+
+                <td>
+                    $${Number(precio).toFixed(2)}
+                </td>
+
+                <td>
+                    ${ivaProducto}%
+                </td>
+
+                <td>
+                    $${totalProducto}
+                </td>
+
+            </tr>
+
+        `;
+    });
+    // Creamos el contenedor de la nueva factura
+    const facturasGeneradas =
+        document.getElementById(
+            "facturasGeneradas"
+        );
+
+    const factura =
+        document.createElement("div");
+
+    factura.className =
+        "factura-generada";
+
+
+    // Construimos visualmente la factura
+    factura.innerHTML = `
+
+        <h3>
+            FACTURA ${numeroFactura}
+        </h3>
+
+        <p>
+            <strong>Fecha:</strong>
+            ${fecha}
+        </p>
+
+        <hr>
+
+        <h4>
+            DATOS DEL EMISOR
+        </h4>
+
+        <p>
+            <strong>Nombre:</strong>
+            ${razonSocial}
+        </p>
+
+        <p>
+            <strong>RUC:</strong>
+            ${ruc}
+        </p>
+
+        <p>
+            <strong>Dirección:</strong>
+            ${direccion}
+        </p>
+
+        <h4>
+            DATOS DEL CLIENTE
+        </h4>
+
+        <p>
+            <strong>Identificación:</strong>
+            ${identificacionCliente}
+        </p>
+
+        <p>
+            <strong>Nombre:</strong>
+            ${nombreCliente}
+        </p>
+
+        <p>
+            <strong>Dirección:</strong>
+            ${direccionCliente}
+        </p>
+
+        <p>
+            <strong>Correo:</strong>
+            ${correoCliente}
+        </p>
+
+        <h4>
+            DETALLE
+        </h4>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Cantidad</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>IVA</th>
+                    <th>Total</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+                ${productosHTML}
+            </tbody>
+
+        </table>
+
+        <div class="total-final">
+
+            <p>
+                Subtotal:
+                $${subtotal}
+            </p>
+
+            <p>
+                IVA:
+                $${iva}
+            </p>
+
+            <h2>
+                TOTAL:
+                $${total}
+            </h2>
+
+        </div>
+    `;
+
+
+    // Mostramos la factura más reciente primero
+    facturasGeneradas.prepend(factura);
+
+
+    // Preparamos el número de la siguiente factura
+    contadorFacturas++;
+
+    const siguienteNumero =
+        String(
+            contadorFacturas
+        ).padStart(9, "0");
+
+
+    document.getElementById(
+        "numeroFactura"
+    ).value =
+        `001-001-${siguienteNumero}`;
+
+
+    // Limpiamos los datos para crear otra factura
+    limpiarFormulario();
+}
+
+
+// Limpia los datos variables de la factura
+function limpiarFormulario() {
+
+    document.getElementById(
+        "identificacionCliente"
+    ).value = "";
+
+    document.getElementById(
+        "nombreCliente"
+    ).value = "";
+
+    document.getElementById(
+        "direccionCliente"
+    ).value = "";
+
+    document.getElementById(
+        "correoCliente"
+    ).value = "";
+
+    document.getElementById(
+        "listaProductos"
+    ).innerHTML = "";
+
+    document.getElementById(
+        "subtotal"
+    ).textContent = "0.00";
+
+    document.getElementById(
+        "ivaTotal"
+    ).textContent = "0.00";
+
+    document.getElementById(
+        "totalFactura"
+    ).textContent = "0.00";
+
+    colocarFechaActual();
+}
+
+
+// Inicializamos el programa colocando la fecha actual
+colocarFechaActual();
+
+
+
+
 
 
